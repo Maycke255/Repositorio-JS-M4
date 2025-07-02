@@ -68,3 +68,15 @@ thisName.falarFncArr();
 //=============================================================
 // COMO FUNCIONA A DESESTRUTURAÇÃO DAS ARRAYS E OBJETOS (Aproveitar esse arquivo para escrever sobre desestruturação também).
 //=============================================================
+/* A desestruturação de uma array e algo simples, e a extração de elementos de uma array ou objeto e transforma-las em uma variavel para usa-las no codigo
+*/
+const people = {
+    name: 'Maycke',
+    age: 21,
+    job: ['front-end developer', 'UX and UI Designer']
+};
+
+const {name} = people;
+console.log(name);
+const [job1, job2] = people.job;
+console.log(job1, job2);
