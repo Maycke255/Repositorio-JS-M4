@@ -64,3 +64,7 @@ const thisName = {
 
 thisName.falarFcnNormal();
 thisName.falarFncArr();
+
+//=============================================================
+// COMO FUNCIONA A DESESTRUTURAÇÃO DAS ARRAYS E OBJETOS (Aproveitar esse arquivo para escrever sobre desestruturação também).
+//=============================================================
