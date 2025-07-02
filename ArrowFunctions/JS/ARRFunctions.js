@@ -1,5 +1,7 @@
 /* Arrow functios são apenas uma versõa mais otimizada do JS moderno de escrever funções anonimas de forma simples, pratica
-e mais legivel, não usamos a palavra function nem damos um nome a função */
+e mais legivel, não usamos a palavra function nem damos um nome a função, passamos somente um sinal de igual e maior apos os argumentos
+representando uma flecha, ela permite retornar uma função em linha unica caso seja uma função simples ou funções callBacks curtas. (Obs:
+não podemos acessar o this dentro de uma arrow function) */
 
 //Funções normais:
 function sum (a, b) {
@@ -48,3 +50,17 @@ console.log(`Números com 2 no final: ${numbersWith2}`);
 
 const numbersDouble = numbers.map(double => double * 2).join(", ");
 console.log(`Dobro dos numeros: ${numbersDouble}`);
+
+//Exemplo de erro usando this:
+const thisName = {
+    //Funciona normalmente, o this e o nome
+    nome: 'Maycke',
+    falarFcnNormal: function () {
+        console.log(`Função normal usando o this: ${this.nome}`)
+    },
+    //Não funciona, da undefined
+    falarFncArr: () => console.log(`Arrow Function: ${this.nome}`)
+};
+
+thisName.falarFcnNormal();
+thisName.falarFncArr();
