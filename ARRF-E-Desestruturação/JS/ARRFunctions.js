@@ -76,6 +76,16 @@ const people = {
     job: ['front-end developer', 'UX and UI Designer']
 };
 
+function fnPeople (person) {
+    return{ name: person.name,
+        age: person.age,
+        job: person.job,
+    }
+}
+
+const display = fnPeople(people);
+console.log(display)
+
 const {name} = people;
 console.log(name);
 const [job1, job2] = people.job;
