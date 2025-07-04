@@ -68,14 +68,27 @@ thisName.falarFncArr();
 //=============================================================
 // COMO FUNCIONA A DESESTRUTURAÇÃO DAS ARRAYS E OBJETOS (Aproveitar esse arquivo para escrever sobre desestruturação também).
 //=============================================================
-/* A desestruturação de uma array e algo simples, e a extração de elementos de uma array ou objeto e transforma-las em uma variavel para usa-las no codigo
-*/
+/* A desestruturação de uma array e algo simples, e a extração de elementos de uma array ou objeto e transforma-las em uma variavel para usa-las no codigo,
+criamos a variavel normalmente, apenas chamamos o nome da variavel com chaves {}, isso para objetos normais, apos isso referenciamos o nome da variavel
+onde estamos desestruturando*/
 const people = {
     name: 'Maycke',
     age: 21,
     job: ['front-end developer', 'UX and UI Designer']
 };
 
+const {name} = people;
+console.log(name);
+
+/* No caso das arrays e diferente, podemos dar os nomes que quisermos, mas e importante prestar atenção na ordem, caso atrapalhe a ordem fica bagunçado
+por que o job1 = front-end developer e o job2 = UX and UI Designer, a ordem que as strings estão na array não e alterada, caso coloquemos o job2 em
+primeiro, vai ficar: job2 = front-end developer e o job1 = UX and UI Designer, ordem não muda */
+const [job1, job2] = people.job;
+console.log(job1, job2);
+
+/* A desestruturação é um recurso do JavaScript que permite extrair dados diretamente de objetos ou arrays e atribuí-los a variáveis individuais de 
+forma prática. Essa função recebe um parâmetro person (que é um objeto igual ao people) e retorna um novo objeto com os mesmos dados, a função está 
+acessando cada propriedade individualmente de person, isso é legal, mas repetitivo.*/
 function fnPeople (person) {
     return{ name: person.name,
         age: person.age,
@@ -86,7 +99,40 @@ function fnPeople (person) {
 const display = fnPeople(people);
 console.log(display)
 
-const {name} = people;
-console.log(name);
-const [job1, job2] = people.job;
-console.log(job1, job2);
+//===========================
+
+// Estudo um pouco mais aprofundado e avançado:
+const newPeople = [
+    {name: 'Wellington',
+        age: 49,
+        job: ['Sales', 'Developer', 'keyboardist']
+    }, {name: 'Moisés',
+        age: 35,
+        job: ['Accountant']
+    }
+];
+
+//podemos acessar com o loop for também, mais antigo, acessamos o segundo elemento pela sua posição, e depois acessamos o nome do objeto e assim por diante
+for (let i = 0; i < newPeople[1].job.length; i++) {
+    const element = newPeople[1].job[i];
+    console.log(element)
+}
+
+/* Se quisermos pegar somente a array inteira do segundo objeto, referenciamos assim */
+const [, { job }] = newPeople
+console.log(job)
+
+/* Se quisermos algo mais especifico, podemos pegar o primeiro objeto, com o job dele que e uma array na segunda posição, ou seja, estamos acessando
+um objeto que contem uma array dentro, e acessando uma string dentro dessa array */
+const [jobDeveloper] = newPeople[0].job[1]
+console.log(jobDeveloper)
+
+/* Nesse caso aqui estamos chamando parametros da função desestruturando a array de objetos, precisamos colocar os parametros da função com os mesmos nom
+es dos objetos, assim ele vai procurar por esses objetos dentro da variavel newPeople que associamos abaixo chamando a função na variavel displayNewPeople
+e com essas referencias retornamos dentro da função os seus parametros */
+function fnNewPeople ({name, age, job}) {
+    return {name, age, job};
+};
+
+const displayPeople = fnNewPeople(newPeople[0]);
+console.log(displayPeople)
