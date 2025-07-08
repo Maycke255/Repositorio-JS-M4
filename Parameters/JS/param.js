@@ -68,4 +68,33 @@ if (acess === undefined) {
 // OPERADOR DE COALESCÊNCIA NULA (??)
 //=========================================================
 
-/* Esse e um operador meio esquisito, e usado como operador lógico, assim como o && e || para fazer verificações */
+/* Esse e um operador meio esquisito, e usado como operador lógico, assim como o && e || para fazer verificações, mas no caso dele O operador ?? retorna 
+o primeiro operando que não for null nem undefined. E ideal usa-lo para Você só quer tratar null e undefined como valores "ausentes", ou se quiser manter 
+valores válidos, como 0, false, ou ''.
+
+Regras:
+Valor à esquerda  ->	Retorno de valor ?? 'padrão'
+null  -> 	'padrão' (como e null, ele ignora o null e passa string 'padrão')
+undefined  ->	'padrão' (como e undefined, ele ignora o undefined e passa a string 'padrão')
+0  ->	0 (retorna 0, mesmo 0 sendo considerado um valor null ou falsy)
+false  ->	false (false também e retornavel)
+'' (string vazia)  ->	'' (também e retornavel) */
+
+/* Exemplo com o operador || logico, o operador || retorna o primeiro valor falsy da esquerda. Valores falsy incluem:
+false
+0
+'' (string vazia)
+null
+undefined
+NaN */
+let nome = 0;
+let nameNull = null
+// Exemplo com o ||
+let retornavel = nome || 'Nenhum valor'
+// Exemplo com o ??, ele retorna o 0
+let retornavelZero = nome ?? 'Nenhum valor'
+// Mas caso seja null ele não retorna
+let retornavelNull = nameNull ?? 'Nenhum valor'
+console.log(retornavel)
+console.log(retornavelZero)
+console.log(retornavelNull)
