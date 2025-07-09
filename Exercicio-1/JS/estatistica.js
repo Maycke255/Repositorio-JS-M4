@@ -51,15 +51,22 @@ Exemplo: */
 // Resolução:
 //Média Aritmética Simples:
 document.getElementById('btnCalculateMS').addEventListener('click', function () {
-    const simpleAverage = document.getElementById('mediaSimples').value
+    const MSText = document.getElementById('mediaSimples').value.trim();
 
-    if (simpleAverage.value === '' || isNaN(simpleAverage)) {
-        alert('Por favor preencha a caixa de texto apenas com numeros inteiros para fazer o calculo.');
+    if (MSText === '') {
+        alert('Por favor, preencha a caixa de texto com números separados por vírgula.');
         return;
     }
 
-    const simpleAverageArr = simpleAverage.split(', ').map(n => Number(n))
+    const MSArr = MSText.split(', ').map(n => Number(n.trim())).filter(n => isNaN(n));
+    let MSSum = MSArr.reduce((a, b) => a + b, 0)
+    console.log(MSSum)
 
-    const [ numbers ] = simpleAverageArr
-    console.log(numbers);
+    let MSArrLength = MSArr.length
+    console.log(MSArrLength)
+    
+    let MSDivide = MSArr.map(() => MSSum / MSArrLength)
+
+    alert(`O resultado da soma foi: ${MSSum}, e o resultado da divisão foi: ${MSDivide[0]}.`)
+    console.log(MSDivide)
 })
