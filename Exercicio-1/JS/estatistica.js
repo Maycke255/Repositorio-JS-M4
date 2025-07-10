@@ -58,15 +58,48 @@ document.getElementById('btnCalculateMS').addEventListener('click', function () 
         return;
     }
 
-    const MSArr = MSText.split(', ').map(n => Number(n.trim())).filter(n => isNaN(n));
+    const MSArr = MSText.split(', ').map(n => Number(n.trim()))
+    
+    if (MSArr.length === 0) {
+        alert('Nenhum número válido foi inserido.');
+        return;
+    }
+
     let MSSum = MSArr.reduce((a, b) => a + b, 0)
     console.log(MSSum)
 
     let MSArrLength = MSArr.length
     console.log(MSArrLength)
     
-    let MSDivide = MSArr.map(() => MSSum / MSArrLength)
+    let MSDivide = MSSum / MSArrLength;
 
-    alert(`O resultado da soma foi: ${MSSum}, e o resultado da divisão foi: ${MSDivide[0]}.`)
+    alert(`O resultado da soma foi: ${MSSum}, e o resultado da divisão foi: ${MSDivide.toFixed(2)}.`)
     console.log(MSDivide)
+});
+
+document.getElementById('btnCalculateMP').addEventListener('click', function () {
+    const MPNumInput = document.getElementById('mediaPonderadaV').value.trim();
+    const MPWeightInput = document.getElementById('mediaPonderadaP').value.trim();
+
+    if (MPNumInput === '' || MPWeightInput === '') {
+        alert('Por favor, preencha a caixa de texto com números separados por vírgula.');
+        return;
+    }
+
+    const MPNumArr = MPNumInput.split(', ').map(n => Number(n.trim()));
+    const MPWeightArr = MPWeightInput.split(', ').map(n => Number(n.trim()));
+
+    if (MPNumArr.length === 0 || MPWeightArr.length === 0 ) {
+        alert('Nenhum número válido foi inserido.');
+        return;
+    }
+
+    let MPNumSum = MPNumArr.reduce((accumulator, number, index) => accumulator + number * MPWeightArr[index], 0);
+    let MPWeightSum = MPWeightArr.reduce((accumulator, number) => accumulator + number, 0);
+
+    const MPEnd = MPNumSum / MPWeightSum;
+
+    alert(`O resultado da media pondera dos números ${MPNumArr.join(', ')} com os pesos ${MPWeightArr.join(', ')} é: ${MPEnd.toFixed(2)}, pois o resultado da multiplicação dos números com os pesos é: ${MPNumSum} e o 
+    resultado da soma dos pesos é ${MPWeightSum}, portanto o peso desse conjunto de números é ${MPEnd.toFixed(2)}.`)
+    console.log(MPEnd)
 })
