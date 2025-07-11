@@ -77,6 +77,7 @@ document.getElementById('btnCalculateMS').addEventListener('click', function () 
     console.log(MSDivide)
 });
 
+//Média Aritimetica Ponderada:
 document.getElementById('btnCalculateMP').addEventListener('click', function () {
     const MPNumInput = document.getElementById('mediaPonderadaV').value.trim();
     const MPWeightInput = document.getElementById('mediaPonderadaP').value.trim();
@@ -102,4 +103,38 @@ document.getElementById('btnCalculateMP').addEventListener('click', function () 
     alert(`O resultado da media pondera dos números ${MPNumArr.join(', ')} com os pesos ${MPWeightArr.join(', ')} é: ${MPEnd.toFixed(2)}, pois o resultado da multiplicação dos números com os pesos é: ${MPNumSum} e o 
     resultado da soma dos pesos é ${MPWeightSum}, portanto o peso desse conjunto de números é ${MPEnd.toFixed(2)}.`)
     console.log(MPEnd)
+})
+
+//Mediana:
+document.getElementById('btnCalculateM').addEventListener('click', function (){
+    const MInput = document.getElementById('mediana').value.trim();
+
+    if (MInput === '') {
+        alert('Por favor, preencha a caixa de texto com números separados por vírgula.');
+        return;
+    }
+    
+    let MArr = MInput.split(', ').map(n => Number(n.trim()));
+    
+    if (MArr.length === 0) {
+        alert('Nenhum número válido foi inserido.');
+        return;
+    }
+
+    let MOrdered = MArr.sort((a, b) => a - b);
+    console.log(MOrdered)
+    let Mmid = Math.floor(MOrdered.length / 2); /* MOrdered.length pega o tamanho da lista de números já ordenada, ao dividir por 2, você tenta descobrir
+    a posição do meio, Math.floor() arredonda para baixo, pois em JavaScript: Se a lista tiver tamanho 5 → 5 / 2 = 2.5, e Math.floor(2.5) vira 2Se for 
+    tamanho 4 → 4 / 2 = 2, e Math.floor(2) fica 2 também, esse meio será usado como índice (posição no array). */
+    console.log(Mmid)
+    
+    let median;
+
+    if (MOrdered.length % 2 !== 0) {
+        median = MOrdered[Mmid]
+    } else {
+        median = (MOrdered[Mmid - 1] + MOrdered[Mmid]) / 2
+    }
+
+    console.log(median)
 })
