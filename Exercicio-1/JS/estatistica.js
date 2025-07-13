@@ -103,7 +103,7 @@ document.getElementById('btnCalculateMP').addEventListener('click', function () 
     alert(`O resultado da media pondera dos números ${MPNumArr.join(', ')} com os pesos ${MPWeightArr.join(', ')} é: ${MPEnd.toFixed(2)}, pois o resultado da multiplicação dos números com os pesos é: ${MPNumSum} e o 
     resultado da soma dos pesos é ${MPWeightSum}, portanto o peso desse conjunto de números é ${MPEnd.toFixed(2)}.`)
     console.log(MPEnd)
-})
+});
 
 //Mediana:
 document.getElementById('btnCalculateM').addEventListener('click', function (){
@@ -137,4 +137,42 @@ document.getElementById('btnCalculateM').addEventListener('click', function (){
     }
 
     console.log(median)
-})
+});
+
+//Moda:
+document.getElementById('btnCalculateModa').addEventListener('click', function () {
+    const MDInput = document.getElementById('moda').value.trim();
+
+    if (MDInput === '') {
+        alert('Por favor, preencha a caixa de texto com números separados por vírgula.');
+        return;
+    }
+
+    let MDArr = MDInput.split(', ').map(n => Number(n.trim()));
+
+    if (MDArr.length === 0) {
+        alert('Nenhum número válido foi inserido.');
+        return;
+    }
+
+    let MDCounting = {}
+    let Maxfrequency = 0;
+    let modas = []
+
+    MDArr.forEach(num => {
+        MDCounting[num] = (MDCounting[num] || 0) + 1;
+
+        if (MDCounting[num] > Maxfrequency) {
+            Maxfrequency = MDCounting[num]
+        }
+    });
+
+    for (let num in MDCounting) {
+        if (MDCounting[num] === Maxfrequency) {
+            modas.push(Number(num))
+        }
+    }
+
+    alert(`A moda da sequencia de numeros inserida e: ${modas}`);
+    console.log(modas)
+});
