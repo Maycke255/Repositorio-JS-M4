@@ -130,12 +130,28 @@ document.getElementById('btnCalculateM').addEventListener('click', function (){
     
     let median;
 
-    if (MOrdered.length % 2 !== 0) {
+    if (MOrdered.length % 2 !== 0) { /* Como funciona essa verificação:
+        Ela verifica se o tamanho da array e impar, ela verifica se tem resto dividido por 2, por exemplo:
+        Ex: 5 % 2 = 1 → ímpar ✅
+        Ex: 6 % 2 = 0 → par ❌
+
+        Como funciona a divisão por resto:
+        A divisão por resto literalmente verifica quanto quanto daquele divisor cabe dentro do número, exemplo: if (7 % 4) -
+        Pergunta: Quantas vezes o número 4 cabe dentro do 7 sem ultrapassar?
+        1 vez: 4 × 1 = 4
+        2 vezes: 4 × 2 = 8 ❌ ultrapassa!
+        Então, cabe 1 vez
+        4 × 1 = 4
+        Agora: quanto sobra até chegar no 7?
+        7 - 4 = 3 → esse é o resto, então se tivesse um número 7, daria impar, então 3 e !== de 0 */
         median = MOrdered[Mmid]
     } else {
+        /* caso a MOrdered seja par, (6 % 2 === 0), afinal o 2 cabe 3 vezes dentro de 6 e não ultrapassa e nem sobra nada, então ele pega os dois numeros
+        centrais */
         median = (MOrdered[Mmid - 1] + MOrdered[Mmid]) / 2
     }
 
+    alert(`A mediana dos números inseridos é: ${median}.`)
     console.log(median)
 });
 
@@ -156,17 +172,44 @@ document.getElementById('btnCalculateModa').addEventListener('click', function (
     }
 
     let MDCounting = {}
+    /* imagine o array assim: [3, 1, 3, 7, 1], ao final da contagem o objeto MDCounting vai ficar assim: 
+    {
+        1: 2,
+        3: 2,
+        7: 1
+    }
+    Ou seja: o número 1 aparece 2 vezes, o número 3 aparece 2 vezes, o número 7 aparece 1 vez. Então contagem[num] guarda o contador de cada número.*/
     let Maxfrequency = 0;
     let modas = []
 
     MDArr.forEach(num => {
+        /* Se o número já existe no objeto contagem, soma mais 1.
+        Se não existe ainda, ele usa 0 (por isso o || 0) e soma 1. Ele praticamente esta dizendo, "caso não exista coloque ele como 0 e some +1" */
         MDCounting[num] = (MDCounting[num] || 0) + 1;
 
+        /* Esse if serve para manter atualizado o maior número de repetições (frequência). Ele compara a frequência atual do número com a maior 
+        frequência já vista e atualiza se necessário.
+        Exemplo: Primeiro número: 3
+        MDCounting[3] = 1
+        Maxfrequency = 0 inicialmente
+        Como 1 > 0, atualiza Maxfrequency = 1
+        
+        Segundo número: 1
+        MDCounting[1] = 1
+        1 > 1 ❌ (falso), Maxfrequency continua 1
+
+        Terceiro número: 3 (de novo)
+        MDCounting[3] agora é 2
+        2 > 1 ✅ (verdadeiro), então Maxfrequency = 2 */
         if (MDCounting[num] > Maxfrequency) {
             Maxfrequency = MDCounting[num]
         }
     });
 
+    /* Parte do código	O que faz
+    for (let num in contagem)	Percorre cada chave (número) do objeto
+    contagem[num] === maxFrequencia	Verifica se aquele número é o mais repetido
+    modas.push(Number(num))	Adiciona o número convertido para array modas */
     for (let num in MDCounting) {
         if (MDCounting[num] === Maxfrequency) {
             modas.push(Number(num))
