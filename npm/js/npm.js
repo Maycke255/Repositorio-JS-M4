@@ -18,5 +18,37 @@ const customParseFormat = require('dayjs/plugin/customParseFormat')
 dayjs.extend(customParseFormat)
 //import dayjs from 'dayjs' // ES 2015
 //O format usamos para definir a data que queremos
-const hoje = dayjs('23-07-2025', 'DD-MM-YYYY').format('DD/MMM/YYYY')
-console.log(hoje)
+const advancedFormat = require('dayjs/plugin/advancedFormat');
+const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
+
+dayjs.extend(advancedFormat);
+dayjs.extend(isSameOrAfter);
+
+//Função para o exercicio:
+function calculateDate (date) {
+    const birthday = dayjs(date, 'DD-MM-YYYY');
+    const today = dayjs()
+
+    const yearBirthday = birthday.format('YYYY')
+    const youYear = parseFloat(yearBirthday)
+
+    const currentAge = dayjs().subtract(youYear, 'year')
+    console.log(currentAge.year())
+
+    const day = birthday.date();
+    const month = birthday.month()
+    console.log(day, month + 1)
+
+    let nextBirthday = dayjs().set('date', day).set('month', month).set('year', today.year());
+
+    if (nextBirthday.isBefore(today, 'day')) {
+        nextBirthday = nextBirthday.add(1, 'year');
+    }
+
+    const daysRemaining = nextBirthday.diff(today, 'day');
+    console.log(`🎉 Próximo aniversário: ${nextBirthday.format('DD/MM/YYYY')}`);
+    console.log(`📆 Faltam ${daysRemaining} dias`);
+}
+
+
+calculateDate('18-02-2004');
