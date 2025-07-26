@@ -11,16 +11,15 @@ utilizar o Node.js**. Para executar seu arquivo com o Node.js basta acessar a pa
 uma data e outra (diff) e exibir uma data em um formato específico (format). */
 
 //Importando o pacote com o node
+//import dayjs from 'dayjs' // ES 2015
 const dayjs = require('dayjs')
 //Usando o plugin que já vem instalado
 const customParseFormat = require('dayjs/plugin/customParseFormat')
-//Instalando o plugin no pacote
-dayjs.extend(customParseFormat)
-//import dayjs from 'dayjs' // ES 2015
-//O format usamos para definir a data que queremos
 const advancedFormat = require('dayjs/plugin/advancedFormat');
 const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
 
+//Instalando os plugins no pacote
+dayjs.extend(customParseFormat)
 dayjs.extend(advancedFormat);
 dayjs.extend(isSameOrAfter);
 
@@ -32,23 +31,33 @@ function calculateDate (date) {
     const yearBirthday = birthday.format('YYYY')
     const youYear = parseFloat(yearBirthday)
 
+    //isso aqui pega o ano que ele digitou e subtrai pelo ano atual
     const currentAge = dayjs().subtract(youYear, 'year')
-    console.log(currentAge.year())
+    console.log(`Você tem ${currentAge.year()} anos.`)
 
-    const day = birthday.date();
-    const month = birthday.month()
-    console.log(day, month + 1)
+    const day = birthday.date();//Primeiro pegamos cada um separadamente, primeiro o dia
+    const month = birthday.month()//Depois o mês
+    // console.log(day, month + 1)//Os meses começam em 0 assim como as listas, então adicionamos mais 1
 
+    //Aqui nos criamos uma variavel armazenando as partes da data de aniversario com a data atual
+    /* O objeto "set" serve para modificar as partes da data, ele serve para setar algo, exemplo:
+    set('date', day) = nesse caso estamos pegando a data atual do dia de HOJE e estamos modificando para a data do aniversario
+    set('month', month) = estamos pegando o mês atual e substituindo pelo mês do aniversario
+    set('year', today.year() = lembrando que no inicio salvamos uma variavel com a data do dia de hoje, então nesse caso pegamos apenas o ano) */
     let nextBirthday = dayjs().set('date', day).set('month', month).set('year', today.year());
 
+    /* Aqui verificamos se o aniversario já passou ou ainda esta por vir, a propriedade isBefore verifica se uma data for antes da segunda,
+    por exemplo: 18-02-2004 veio antes de HOJE, estamos verificando se essa data veio antes da data de hoje, caso tenha vindo, adiociona mais
+    1 ano, que significa que o aniversario já passou e sera no ano que vem */
     if (nextBirthday.isBefore(today, 'day')) {
         nextBirthday = nextBirthday.add(1, 'year');
     }
 
+    //Essa variavel serve para calcular a difereça entre uma data e outra, ela calcula quanto tempo falta do proximo aniversario ate os dias de hoje
     const daysRemaining = nextBirthday.diff(today, 'day');
+
     console.log(`🎉 Próximo aniversário: ${nextBirthday.format('DD/MM/YYYY')}`);
     console.log(`📆 Faltam ${daysRemaining} dias`);
 }
 
-
-calculateDate('18-02-2004');
+module.exports = calculateDate;
