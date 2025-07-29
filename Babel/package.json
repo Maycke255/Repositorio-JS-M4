@@ -1,0 +1,19 @@
+{
+  "name": "babel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "watch": "babel src --out-dir dist --watch",
+    "start": "node dist/babel.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0"
+  }
+}
