@@ -1,5 +1,7 @@
 "use strict";
 
+/* Esse e código para navegadores que não são compativeis com JS moderno, são códigos antigos que funcionam apenas em navegadores mais antigos */
+
 var _user$friends$;
 var user = {
   name: "John Doe",
