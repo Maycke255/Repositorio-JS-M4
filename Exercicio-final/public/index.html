@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizando um projeto moderno</title>
-    <link rel="stylesheet" href="../src/css/index.css">
+    <link rel="stylesheet" href="../dist/index.min.css">
 </head>
 <body>
     <header>
@@ -20,14 +20,15 @@
                 <label for="getCode">Clique para obter seu código:</label>
                 <br>
                 <button id="getCode" class="get-code">OBTER CÓDIGO</button>
+                <span id="message"></span>
             </div>
             <div class="group-copy-code">
-                <input type="text" class="text-code" disabled>
-                <button id="copyCode" class="copy-code">COPIAR</button>
+                <input type="text" id="textCode" class="text-code" disabled>
+                <button id="copyCode" class="copy-code">Copy</button>
             </div>
         </section>
     </main>
 
-    <script src="../src/js/index.js"></script>
+    <script src="../dist/index.min.js" type="module"></script>
 </body>
 </html>

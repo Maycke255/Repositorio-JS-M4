@@ -18,4 +18,4 @@
 
     **Loaders e plugins necessarios:**
 
-    ` npm i --save-dev babel-loader @babel/core @babel/preset-env style-loader css-loader html-webpack-plugin clean-webpack-plugin `
+    ` npm i --save-dev babel-loader @babel/core @babel/preset-env style-loader css-loader html-webpack-plugin clean-webpack-plugin webpack-dev-server `
